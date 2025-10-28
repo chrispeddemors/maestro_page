@@ -28,6 +28,21 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .page-wrapper {
@@ -37,15 +52,19 @@ body {
 
 .hero {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 2rem clamp(1.5rem, 6vw, 8rem) 4rem;
   background: radial-gradient(circle at 20% 20%, rgba(108, 99, 255, 0.22), transparent 55%),
     radial-gradient(circle at 80% 10%, rgba(144, 202, 249, 0.18), transparent 55%),
     linear-gradient(135deg, #050508 0%, #0e0e10 60%, #14141a 100%);
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  opacity: 1;
 }
 
 .hero__overlay {
@@ -271,13 +290,33 @@ body {
 }
 
 .section {
+  min-height: 100vh;
   padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 6vw, 7rem);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  opacity: 0;
+}
+
+@keyframes fadeInSection {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .section__intro {
   max-width: 620px;
   margin-bottom: 3rem;
+  text-align: center;
 }
 
 .section__title {
@@ -720,7 +759,7 @@ body {
 }
 
 .section--contact {
-  padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 7rem);
+  padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 6vw, 7rem);
   background: radial-gradient(circle at 15% 20%, rgba(108, 99, 255, 0.25), transparent 55%),
     radial-gradient(circle at 85% 10%, rgba(108, 99, 255, 0.18), transparent 50%),
     #10101a;
@@ -759,6 +798,7 @@ body {
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.5);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  scroll-snap-align: none;
 }
 
 @keyframes drift {

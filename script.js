@@ -173,25 +173,25 @@ if (typeof gsap !== 'undefined') {
     ctx.shadowBlur = 4;
     ctx.shadowColor = 'rgba(140, 130, 255, 0.4)';
     
+    const maxDistance = 180; // Maximum distance for connections
+    
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 150) {
-          // Smooth fade based on distance, but ensure lines never disappear completely
-          const normalizedDistance = distance / 150;
-          const baseOpacity = 0.3; // Base opacity for nearby nodes
-          const fadeOpacity = Math.pow(1 - normalizedDistance, 2) * 0.25;
-          const opacity = Math.max(0.25, baseOpacity - fadeOpacity); // Never go below 0.25
+        if (distance < maxDistance) {
+          // Smooth opacity gradient based on distance
+          // opacity = 1 - (distance / maxDistance), clamped between 0 and 0.4
+          const rawOpacity = 1 - (distance / maxDistance);
+          const opacity = Math.max(0, Math.min(0.4, rawOpacity));
           
-          // Blend between violet tones based on distance
-          const r = Math.floor(140 - normalizedDistance * 30); // 140 → 110
-          const g = Math.floor(130 - normalizedDistance * 30); // 130 → 100
-          const b = 255;
+          // Skip drawing if opacity is too low for performance
+          if (opacity < 0.02) continue;
           
-          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+          // Use consistent violet tone
+          ctx.strokeStyle = `rgba(140, 130, 255, ${opacity})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
@@ -255,3 +255,34 @@ if (typeof gsap !== 'undefined') {
     }, 100);
   });
 })();
+
+// Smooth scroll to sections
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const targetSection = document.querySelector(targetId);
+    if (targetSection) {
+      targetSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Animate sections on scroll into view
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation = 'fadeInSection 0.8s ease-out forwards';
+      sectionObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section').forEach(section => {
+  sectionObserver.observe(section);
+});
