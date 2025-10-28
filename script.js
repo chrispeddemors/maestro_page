@@ -59,3 +59,19 @@ heroButtons.forEach((btn, index) => {
   btn.style.setProperty('--delay', `${index * 0.2}s`);
   btn.classList.add('btn--animate');
 });
+
+// Hero text entrance animation with GSAP
+if (typeof gsap !== 'undefined') {
+  const heroElements = document.querySelectorAll('.hero-animate');
+  
+  if (heroElements.length > 0) {
+    gsap.to(heroElements, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      stagger: 0.15,
+      delay: 0.2
+    });
+  }
+}
