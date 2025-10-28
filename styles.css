@@ -370,17 +370,6 @@ body {
   border-radius: 999px;
 }
 
-.timeline__progress {
-  position: absolute;
-  top: calc(50% - 1px);
-  left: 10%;
-  right: 10%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.35;
-  pointer-events: none;
-}
-
 .timeline__step {
   position: relative;
   padding: 2rem;
@@ -784,10 +773,6 @@ body {
     grid-auto-flow: row;
     grid-template-columns: none;
     overflow: visible;
-  }
-
-  .timeline__progress {
-    display: none;
   }
 }
 
