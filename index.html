@@ -87,59 +87,73 @@
           <h2 class="section__title">Eerst luisteren, dan bouwen.</h2>
           <p class="section__subtitle">We starten met inzicht, niet met code.</p>
         </div>
-        <div class="timeline" role="list">
-          <article class="timeline__step" role="listitem">
-            <div class="timeline__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 18.5a3.5 3.5 0 1 0 7 0c0-1.57.92-2.52 2.04-3.46"/>
-                <path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 10-6.5 10-.5 0-6.5-4-6.5-10Z"/>
-                <path d="M15 2.34v1.66a2 2 0 0 1-2 2H4"/>
-                <path d="M20 2.34v1.66a2 2 0 0 0 2 2h-9"/>
-              </svg>
-            </div>
-            <div class="timeline__content">
-              <h3>Luisteren</h3>
-              <p>We bespreken jouw proces en waar het stroopt.</p>
-            </div>
-          </article>
-          <article class="timeline__step" role="listitem">
-            <div class="timeline__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a4 4 0 0 1 0-5.656l5.586-5.586a4 4 0 0 1 5.656 0l1.586 1.586a1 1 0 0 1 0 1.414l-9 9Z"/>
-                <path d="M18 13l-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"/>
-              </svg>
-            </div>
-            <div class="timeline__content">
-              <h3>Ontwerpen</h3>
-              <p>We maken een concreet plan, gericht op tijdswinst en duidelijkheid.</p>
-            </div>
-          </article>
-          <article class="timeline__step" role="listitem">
-            <div class="timeline__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="6" x2="6" y1="3" y2="15"/>
-                <circle cx="18" cy="6" r="3"/>
-                <circle cx="6" cy="18" r="3"/>
-                <path d="M18 9a9 9 0 0 1-9 9"/>
-              </svg>
-            </div>
-            <div class="timeline__content">
-              <h3>Automatiseren</h3>
-              <p>We bouwen stap voor stap en testen elk onderdeel.</p>
-            </div>
-          </article>
-          <article class="timeline__step" role="listitem">
-            <div class="timeline__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-              </svg>
-            </div>
-            <div class="timeline__content">
-              <h3>Verbinden</h3>
-              <p>We zorgen dat alle systemen samenwerken in één overzichtelijke omgeving.</p>
-            </div>
-          </article>
+        <div class="timeline-container">
+          <div class="timeline-track" aria-hidden="true">
+            <div class="timeline-line"></div>
+            <div class="timeline-pulse"></div>
+          </div>
+          <div class="timeline" role="list">
+            <article class="timeline-node timeline-node--1" role="listitem">
+              <div class="timeline-node__icon-wrapper">
+                <div class="timeline-node__icon timeline-fade-in">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 18.5a3.5 3.5 0 1 0 7 0c0-1.57.92-2.52 2.04-3.46"/>
+                    <path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 10-6.5 10-.5 0-6.5-4-6.5-10Z"/>
+                    <path d="M15 2.34v1.66a2 2 0 0 1-2 2H4"/>
+                    <path d="M20 2.34v1.66a2 2 0 0 0 2 2h-9"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="timeline-node__content timeline-fade-in">
+                <h3>Luisteren</h3>
+                <p>We bespreken jouw proces en waar het stroopt.</p>
+              </div>
+            </article>
+            <article class="timeline-node timeline-node--2" role="listitem">
+              <div class="timeline-node__icon-wrapper">
+                <div class="timeline-node__icon timeline-fade-in">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a4 4 0 0 1 0-5.656l5.586-5.586a4 4 0 0 1 5.656 0l1.586 1.586a1 1 0 0 1 0 1.414l-9 9Z"/>
+                    <path d="M18 13l-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="timeline-node__content timeline-fade-in">
+                <h3>Ontwerpen</h3>
+                <p>We maken een concreet plan, gericht op tijdswinst en duidelijkheid.</p>
+              </div>
+            </article>
+            <article class="timeline-node timeline-node--3" role="listitem">
+              <div class="timeline-node__icon-wrapper">
+                <div class="timeline-node__icon timeline-fade-in">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" x2="6" y1="3" y2="15"/>
+                    <circle cx="18" cy="6" r="3"/>
+                    <circle cx="6" cy="18" r="3"/>
+                    <path d="M18 9a9 9 0 0 1-9 9"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="timeline-node__content timeline-fade-in">
+                <h3>Automatiseren</h3>
+                <p>We bouwen stap voor stap en testen elk onderdeel.</p>
+              </div>
+            </article>
+            <article class="timeline-node timeline-node--4" role="listitem">
+              <div class="timeline-node__icon-wrapper">
+                <div class="timeline-node__icon timeline-fade-in">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="timeline-node__content timeline-fade-in">
+                <h3>Verbinden</h3>
+                <p>We zorgen dat alles samenwerken kan in één duidelijke omgeving.</p>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 

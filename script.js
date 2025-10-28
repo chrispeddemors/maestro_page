@@ -2,19 +2,21 @@ const observerOptions = {
   threshold: 0.35,
 };
 
-const revealElements = document.querySelectorAll('.timeline__step');
+const timelineNodes = document.querySelectorAll('.timeline-node');
 const counterElements = document.querySelectorAll('.result__value');
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
+const timelineObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      revealObserver.unobserve(entry.target);
+      setTimeout(() => {
+        entry.target.classList.add('is-visible');
+      }, index * 150);
+      timelineObserver.unobserve(entry.target);
     }
   });
 }, observerOptions);
 
-revealElements.forEach((el) => revealObserver.observe(el));
+timelineNodes.forEach((el) => timelineObserver.observe(el));
 
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {

@@ -353,84 +353,160 @@ body {
 }
 
 .section--timeline {
-  background: linear-gradient(180deg, var(--bg) 0%, #11111a 60%, var(--bg) 100%);
+  background: linear-gradient(180deg, #0b0b12 0%, #111 100%);
+}
+
+.timeline-container {
+  position: relative;
+  padding: 5rem 0;
+}
+
+.timeline-track {
+  position: absolute;
+  top: 6rem;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.timeline-line {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(99, 102, 241, 0) 0%,
+    rgba(99, 102, 241, 0.3) 20%,
+    rgba(99, 102, 241, 0) 40%,
+    rgba(99, 102, 241, 0) 100%
+  );
+  background-size: 200% 100%;
+  filter: blur(2px);
+  animation: flow 6s linear infinite;
+}
+
+.timeline-pulse {
+  display: none;
 }
 
 .timeline {
   position: relative;
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(220px, 1fr);
-  gap: 2rem;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-  scrollbar-width: thin;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  z-index: 1;
 }
 
-.timeline::-webkit-scrollbar {
-  height: 6px;
-}
-
-.timeline::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-}
-
-.timeline__step {
+.timeline-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   position: relative;
-  padding: 2rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  overflow: hidden;
-  transform: translateY(20px);
-  opacity: 0;
-  transition: transform 500ms ease, opacity 500ms ease;
 }
 
-.timeline__step::before {
+.timeline-node__icon-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-node__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  transition: all var(--transition);
+  opacity: 0;
+  transform: translateY(20px);
+  position: relative;
+  animation: nodePulse 4s ease-in-out infinite;
+}
+
+.timeline-node__icon::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle at top, rgba(108, 99, 255, 0.18), transparent 70%);
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(88, 101, 242, 0.3), transparent 70%);
   opacity: 0;
-  transition: opacity var(--transition);
+  animation: nodeGlow 4s ease-in-out infinite;
 }
 
-.timeline__icon {
-  display: inline-flex;
-  margin-bottom: 1rem;
-  color: #9CA3AF;
-  transition: transform var(--transition), filter var(--transition);
+.timeline-node--1 .timeline-node__icon {
+  animation-delay: 0s;
 }
 
-.timeline__icon svg {
-  width: 1.8rem;
-  height: 1.8rem;
+.timeline-node--1 .timeline-node__icon::before {
+  animation-delay: 0s;
 }
 
-.timeline__step:hover .timeline__icon {
-  transform: translateY(-4px);
-  filter: drop-shadow(0 0 12px rgba(108, 99, 255, 0.25));
+.timeline-node--2 .timeline-node__icon {
+  animation-delay: 1s;
 }
 
-.timeline__content h3 {
+.timeline-node--2 .timeline-node__icon::before {
+  animation-delay: 1s;
+}
+
+.timeline-node--3 .timeline-node__icon {
+  animation-delay: 2s;
+}
+
+.timeline-node--3 .timeline-node__icon::before {
+  animation-delay: 2s;
+}
+
+.timeline-node--4 .timeline-node__icon {
+  animation-delay: 3s;
+}
+
+.timeline-node--4 .timeline-node__icon::before {
+  animation-delay: 3s;
+}
+
+.timeline-node__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.timeline-node__content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition);
+}
+
+.timeline-node__content h3 {
   font-size: 1.2rem;
-  margin-bottom: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  letter-spacing: 0.02em;
 }
 
-.timeline__content p {
-  color: var(--text-muted);
+.timeline-node__content p {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
-.timeline__step.is-visible {
+.timeline-fade-in.is-visible {
+  opacity: 1;
   transform: translateY(0);
-  opacity: 1;
 }
 
-.timeline__step.is-visible::before {
+.timeline-node.is-visible .timeline-node__icon {
   opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-node.is-visible .timeline-node__content {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section--environment {
@@ -774,6 +850,63 @@ body {
   }
 }
 
+@keyframes flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes flowVertical {
+  0% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 50% 200%;
+  }
+}
+
+@keyframes nodePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.03);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes nodeGlow {
+  0%, 100% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulseFlowVertical {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
 @media (max-width: 860px) {
   .hero {
     padding: 2rem clamp(1.5rem, 6vw, 4rem) 3rem;
@@ -787,10 +920,45 @@ body {
     min-height: 260px;
   }
 
+  .timeline-container {
+    padding: 3rem 0;
+  }
+
+  .timeline-track {
+    top: 4rem;
+    left: 50%;
+    width: 2px;
+    height: calc(100% - 8rem);
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .timeline-line {
+    background: linear-gradient(
+      to bottom,
+      rgba(99, 102, 241, 0) 0%,
+      rgba(99, 102, 241, 0.3) 20%,
+      rgba(99, 102, 241, 0) 40%,
+      rgba(99, 102, 241, 0) 100%
+    );
+    background-size: 100% 200%;
+    animation: flowVertical 6s linear infinite;
+  }
+
   .timeline {
-    grid-auto-flow: row;
-    grid-template-columns: none;
-    overflow: visible;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .timeline-node {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .timeline-node__icon-wrapper {
+    margin-bottom: 0;
+    margin-right: 1.5rem;
   }
 }
 
@@ -804,7 +972,6 @@ body {
   }
 
   .card,
-  .timeline__step,
   .result {
     padding: 1.75rem;
   }
